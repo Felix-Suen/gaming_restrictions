@@ -24,7 +24,7 @@ def app_restrict():
     for process in psutil.process_iter(attrs=['pid', 'name']):
         try:
             process_name = process.info['name']
-            if process_name in restricted_apps and is_within_restriction():
+            if is_within_restriction() and process_name in restricted_apps:
                 print(f"Restricting {process_name} (PID: {process.info['pid']})")
                 os.system(f"taskkill /F /PID {process.info['pid']}")
 
